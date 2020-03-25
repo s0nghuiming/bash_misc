@@ -32,3 +32,21 @@ function setup_args() {
     done
 }
 setup_args $@
+
+
+# Input text from inline
+cat << EOF >> /etc/pam.d/slurm
+account  required  pam_unix.so
+account  required  pam_slurm.so
+auth     required  pam_localuser.so
+session  required  pam_limits.so
+EOF
+
+# Input text for a while loop
+while read line
+do
+  echo $line
+done << EOF1
+ab
+cd
+EOF1
